@@ -3,9 +3,6 @@
 #include "leds.h"
 #include "ir.h"
 
-// IR configuration
-
-
 int main(void)
 {
     ir_setup();

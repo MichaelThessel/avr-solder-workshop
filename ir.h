@@ -1,3 +1,6 @@
+#ifndef __ir_h_included__
+#define __ir_h_included__
+
 #include "macros.h"
 
 #define IR_CFG_PORT_NAME    D
@@ -19,5 +22,6 @@
 /*
  * Setup
  */
-
 void ir_setup();
+
+#endif
