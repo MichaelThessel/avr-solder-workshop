@@ -1,10 +1,10 @@
 BIN=main
 OBJS=main.o
-SRCS=main.c Light_WS2812/light_ws2812.c
+SRCS=main.c leds.c Light_WS2812/light_ws2812.c
 
 MCU=atmega328p
 SPEED=8000000UL
-LIBS=-L light_ws2812
+LIBS=-L
 
 CC=avr-gcc
 OBJCOPY=avr-objcopy
