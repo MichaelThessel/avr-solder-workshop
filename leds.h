@@ -4,4 +4,4 @@
  * @param brightness Led brightness (1-255)
  * @param delay Delay beteween updates
  */
-void run_leds(int, int);
+void leds_run(int, int);

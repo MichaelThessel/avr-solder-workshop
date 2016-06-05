@@ -6,7 +6,7 @@
 
 struct cRGB led[2];
 
-void run_leds(int brightness, int delay)
+void leds_run(int brightness, int delay)
 {
     int brightness_max = 255;
     int brightness_2 = abs(brightness / 2);
