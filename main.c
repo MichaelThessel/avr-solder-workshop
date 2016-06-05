@@ -10,10 +10,10 @@ int main(void)
     while(1) {
         //leds_run(10, 10);
 
-        IR_LED_ON();
-        _delay_ms(100);
-        IR_LED_OFF();
-        _delay_ms(100);
+        IR_TX_ON();
+        _delay_us(1);
+        IR_TX_OFF();
+        _delay_us(9);
     }
 
     return 0;

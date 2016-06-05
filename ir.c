@@ -3,5 +3,6 @@
 
 void ir_setup()
 {
-    IR_TX_ENABLE();
+    IR_TX_SETUP();
+    IR_RX_ENABLE();
 }
