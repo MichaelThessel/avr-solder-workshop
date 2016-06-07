@@ -48,3 +48,16 @@ void leds_off()
 
     ws2812_setleds(leds, 2);
 }
+
+void leds_blink()
+{
+    struct cRGB color = {20, 20, 20};
+    for (int i = 0; i < leds_count; i++) {
+        leds_set(i, color);
+    }
+
+    _delay_ms(500);
+
+    leds_off();
+}
+

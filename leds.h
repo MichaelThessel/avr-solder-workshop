@@ -23,4 +23,10 @@ void leds_run(int brightness, int delay);
  */
 void leds_off();
 
+/**
+ * Blink all leds
+ */
+void leds_blink();
+
+
 #endif
