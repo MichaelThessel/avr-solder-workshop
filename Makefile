@@ -4,7 +4,7 @@ SRCS=main.c leds.c ir.c Light_WS2812/light_ws2812.c
 
 MCU=atmega328p
 SPEED=8000000UL
-LIBS=-L
+LIBS=
 
 CC=avr-gcc
 OBJCOPY=avr-objcopy
