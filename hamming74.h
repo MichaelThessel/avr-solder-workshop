@@ -14,7 +14,7 @@ void hamming74_encode(uint8_t data[4], uint8_t enc[7]);
  *
  *  enc: Encoded data
  *
- *  return: False when the data contains errors; true otherwise
+ *  return: Positon of incorrect bit or 0 if no error
  */
 int hamming74_error_detect(uint8_t enc[7]);
 
