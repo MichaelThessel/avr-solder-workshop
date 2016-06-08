@@ -2,7 +2,7 @@
  * Hamming 7,4 encode and decode
  *
  * code based on:
- * https://www.wikiwand.com/en/Hamming(7,4)
+ * https://en.wikipedia.org/wiki/Hamming(7,4)
  */
 #include <stdio.h>
 #include "hamming74.h"
