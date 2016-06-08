@@ -1,3 +1,6 @@
+#ifndef __hamming74_h_included__
+#define __hamming74_h_included__
+
 #include <stdint.h>
 #include <stdbool.h>
 
@@ -43,3 +46,5 @@ bool hamming74_decode(uint8_t enc[7], uint8_t data[4]);
  *  data: Decoded data
  */
 void hamming74_map(uint8_t enc[7], uint8_t data[4]);
+
+#endif
