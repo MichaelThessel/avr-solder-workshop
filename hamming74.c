@@ -4,7 +4,6 @@
  * code based on:
  * https://en.wikipedia.org/wiki/Hamming(7,4)
  */
-#include <stdio.h>
 #include "hamming74.h"
 
 // Generator Matrix
