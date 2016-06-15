@@ -17,7 +17,7 @@ uint8_t G[7][4] = {
     {0, 0, 0, 1}
 };
 
-// Parity check kmatrix
+// Parity check matrix
 uint8_t H[3][7] = {
     {1, 0, 1, 0, 1, 0, 1},
     {0, 1, 1, 0, 0, 1, 1},
