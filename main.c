@@ -11,16 +11,20 @@ int main(void)
     leds_blink();
 
     ir_setup();
+    ir_tx_init();
 
     while(1) {
         wdt_reset();
 
         //leds_run(10, 10);
 
-        IR_TX_ON();
-        _delay_us(10);
-        IR_TX_OFF();
-        _delay_ms(500);
+        while (ir_tx_active()) {
+            _delay_us(1);
+        }
+
+        uint8_t data[4] = {1, 0, 1, 0};
+        ir_tx_send(data);
+        _delay_us(100);
     }
 
     return 0;
