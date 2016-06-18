@@ -42,8 +42,13 @@ void ir_tx_handle()
 {
     if (!ir_has_data) return;
 
-    if (ir_buffer_index < ir_buffer_size) {
-        if (ir_buffer[ir_buffer_index]) {
+    if (ir_buffer_index == 0) {
+        // Every transmission starts with a 1 bit
+        IR_TX_REG_PORT |= (1 << IR_TX_PIN_PORT);
+        ir_buffer_index++;
+    } else if (ir_buffer_index < ir_buffer_size + 1) {
+        // Payload
+        if (ir_buffer[ir_buffer_index - 1]) {
             IR_TX_REG_PORT |= (1 << IR_TX_PIN_PORT);
         } else {
             IR_TX_REG_PORT &= ~(1 << IR_TX_PIN_PORT);
@@ -51,6 +56,7 @@ void ir_tx_handle()
 
         ir_buffer_index++;
     } else {
+        // Reset
         ir_buffer_index = 0;
         ir_has_data = 0;
         IR_TX_REG_PORT &= ~(1 << IR_TX_PIN_PORT);
