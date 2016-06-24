@@ -1,13 +1,14 @@
 #include <avr/io.h>
 #include <avr/interrupt.h>
 #include <util/delay.h>
+#include <util/delay_basic.h>
 #include "ir.h"
 #include "hamming74.h"
 
 int ir_buffer;
-uint8_t ir_buffer_index = 0;
-uint8_t ir_buffer_size = 7;
 uint8_t ir_active_flag = 0;
+uint8_t ir_offset_delay = 85;
+int ir_offset_success = 100;
 
 void ir_setup()
 {
@@ -68,8 +69,8 @@ void ir_rx_handle()
 
     ir_active_flag = 1;
 
-    // Offset sampling to discard first bit; 85 has been determined empirically
-    _delay_us(85);
+    // Offset sampling to discard first bit;
+    ir_offset();
 
     // Sample every ~100us
     ir_buffer = 0;
@@ -88,10 +89,37 @@ void ir_rx_handle()
     if (hamming74_decode(ir_data, data)) {
         // Receive data callback
         ir_rx_success(data);
+    } else {
+        // Adjust the offset dynamically
+        ir_offset_adjust();
     }
 
     ir_active_flag = 0;
 }
+
+void ir_offset_adjust()
+{
+    if (ir_buffer == 0) {
+        if (--ir_offset_success > 0) return;
+
+        ir_offset_delay--;
+        ir_offset_success = 100;
+
+
+        if (ir_offset_delay < 83) {
+            ir_offset_delay = 88;
+        }
+    } else if (ir_offset_success < 300) {
+        ir_offset_success++;
+    }
+}
+
+void ir_offset()
+{
+    _delay_loop_2(ir_offset_delay * 2);
+
+}
+
 
 // ISR for receive interrupt
 ISR(INT1_vect)

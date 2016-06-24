@@ -79,4 +79,14 @@ void ir_rx_handle();
  */
 void ir_rx_success(uint8_t data[4]);
 
+/*
+ * Adjust the IR offset dynamically
+ */
+void ir_offset_adjust();
+
+/*
+ * Sample offset delay
+ */
+void ir_offset();
+
 #endif
