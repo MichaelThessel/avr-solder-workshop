@@ -40,11 +40,9 @@
 /*
  * Macros
  */
-#define IR_TX_SETUP()  (IR_TX_REG_DDR |= (1 << IR_TX_PIN_DDR))
-#define IR_RX_SETUP()  ((IR_RX_REG_DDR &= ~(1 << IR_RX_PIN_DDR)), \
-                        (PCICR |= (1 << PCIE2)), \
-                        (PCMSK2 |= (1 << PCINT19)), \
-                        (EICRA |= (1 << ISC11)))
+#define IR_TX_SETUP()  ((IR_TX_REG_DDR |= (1 << IR_TX_PIN_DDR)), \
+                        (IR_TX_REG_PORT &= ~(1 << IR_TX_PIN_PORT)))
+#define IR_RX_SETUP()  (IR_RX_REG_DDR &= ~(1 << IR_RX_PIN_DDR))
 
 #define IR_TX_ON()  (IR_TX_REG_PORT |= (1 << IR_TX_PIN_PORT))
 #define IR_TX_OFF()  (IR_TX_REG_PORT &= ~(1 << IR_TX_PIN_PORT))
@@ -58,16 +56,11 @@
 void ir_setup();
 
 /*
- * Initialize IR transmissions
- */
-void ir_tx_init();
-
-/*
- * Check whether or not IR is currently transmitting
+ * Check whether or not IR is currently active
  *
- *  return: 1 if currently transmitting 0 otherwise
+ *  return: 1 if IR is active; 0 otherwise
  */
-uint8_t ir_tx_active();
+uint8_t ir_is_active();
 
 /*
  * Send data
@@ -76,8 +69,8 @@ uint8_t ir_tx_active();
 void ir_tx_send(uint8_t data[4]);
 
 /*
- * Callback for ISR; handle transmission
+ * ISR; handle reception of IR data
  */
-void ir_tx_handle();
+void ir_rx_handle();
 
 #endif
