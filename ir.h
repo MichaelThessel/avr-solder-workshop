@@ -73,4 +73,10 @@ void ir_tx_send(uint8_t data[4]);
  */
 void ir_rx_handle();
 
+/*
+ * Callback when data has been receieved
+ *  data: 4 bits of data received
+ */
+void ir_rx_success(uint8_t data[4]);
+
 #endif

@@ -85,9 +85,10 @@ void ir_rx_handle()
         ir_data[i] = (ir_buffer & (1 << i)) ? 1 : 0;
     }
 
-    hamming74_decode(ir_data, data);
-
-    // TODO: impelment callback
+    if (hamming74_decode(ir_data, data)) {
+        // Receive data callback
+        ir_rx_success(data);
+    }
 
     ir_active_flag = 0;
 }
