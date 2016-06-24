@@ -69,7 +69,7 @@ void ir_rx_handle()
 
     ir_active_flag = 1;
 
-    // Offset sampling to discard first bit;
+    // Offset sampling to discard first bit
     ir_offset();
 
     // Sample every ~100us
@@ -77,7 +77,6 @@ void ir_rx_handle()
     for (int i = 0; i < 7; i++) {
         ir_buffer = ir_buffer << 1;
         ir_buffer += ((IR_RX_REG_PIN & (1 << IR_RX_PIN_PIN)) >> IR_RX_PIN_PIN) ^ 1;
-        // TODO: add some delta in case Hamming fails frequently
         _delay_us(97);
     }
 
