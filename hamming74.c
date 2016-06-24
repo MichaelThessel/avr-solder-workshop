@@ -56,12 +56,12 @@ int hamming74_error_detect(uint8_t enc[7])
         z[i] = z[i] % 2 == 0 ? 0 : 1;
     }
 
-    return (z[0] + z[1] * 2 + z[2] * 4) - 1;
+    return (z[0] + z[1] * 2 + z[2] * 4);
 }
 
 void hamming74_error_correct(uint8_t enc[7], int pos)
 {
-    enc[pos] = enc[pos] == 0 ? 1 : 0;
+    enc[pos - 1] = !enc[pos - 1];
 }
 
 bool hamming74_decode(uint8_t enc[7], uint8_t data[4])
@@ -77,9 +77,8 @@ bool hamming74_decode(uint8_t enc[7], uint8_t data[4])
     // Try to correct error
     hamming74_error_correct(enc, pos);
     pos = hamming74_error_detect(enc);
-    if (!pos) {
-        hamming74_map(enc, data);
-    }
+
+    hamming74_map(enc, data);
 
     return pos == 0;
 }
