@@ -4,8 +4,8 @@
 #include <util/delay.h>
 #include "Light_WS2812/light_ws2812.h"
 
-uint8_t leds_count = 2;
-struct cRGB leds[2];
+uint8_t leds_count = 5;
+struct cRGB leds[5];
 
 void leds_set(int id, struct cRGB rgb)
 {
@@ -46,7 +46,7 @@ void leds_off()
         leds_set(i, color);
     }
 
-    ws2812_setleds(leds, 2);
+    ws2812_setleds(leds, leds_count);
 }
 
 void leds_blink()
