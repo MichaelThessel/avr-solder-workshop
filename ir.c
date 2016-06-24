@@ -115,8 +115,9 @@ void ir_offset_adjust()
 
 void ir_offset()
 {
+    // @ 8Mhz, 1 cycle runs 0.125us, _delay_loop_2 takes 4 cyles/count
+    // So each count is 0.5us
     _delay_loop_2(ir_offset_delay * 2);
-
 }
 
 
