@@ -50,6 +50,9 @@
 #define IR_RX_ENABLE() ((IR_SHDN_REG_DDR |= (1 << IR_SHDN_PIN_DDR)), \
                         (IR_SHDN_REG_PORT |= (1 << IR_SHDN_PIN_PORT)))
 
+#define IR_PACKET_SIZE 7
+#define IR_DATA_SIZE 7
+
 /*
  * Setup
  */
@@ -66,7 +69,7 @@ uint8_t ir_is_active();
  * Send data
  *  data: 4 bits of data to send
  */
-void ir_tx_send(uint8_t data[4]);
+void ir_tx_send(uint8_t data[IR_DATA_SIZE]);
 
 /*
  * ISR; handle reception of IR data
@@ -77,7 +80,7 @@ void ir_rx_handle();
  * Callback when data has been receieved
  *  data: 4 bits of data received
  */
-void ir_rx_success(uint8_t data[4]);
+void ir_rx_success(uint8_t data[IR_DATA_SIZE]);
 
 /*
  * Adjust the IR offset dynamically

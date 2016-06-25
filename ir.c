@@ -28,16 +28,16 @@ uint8_t ir_is_active()
     return ir_active_flag ? 1 : 0;
 }
 
-void ir_tx_send(uint8_t data[4])
+void ir_tx_send(uint8_t data[IR_DATA_SIZE])
 {
-    uint8_t ir_data[7];
+    uint8_t ir_data[IR_PACKET_SIZE];
 
     ir_active_flag = 1;
 
     hamming74_encode(data, ir_data);
 
     // Send the data
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i <= IR_PACKET_SIZE; i++) {
         if (i == 0) {
             // Transmissions always start with a 1 bit
             IR_TX_ON();
@@ -61,8 +61,8 @@ void ir_tx_send(uint8_t data[4])
 
 void ir_rx_handle()
 {
-    uint8_t ir_data[7];
-    uint8_t data[4] = {1, 0, 0, 0};
+    uint8_t ir_data[IR_PACKET_SIZE];
+    uint8_t data[IR_DATA_SIZE];
 
     // Don't receive while transmitting
     if (ir_is_active()) return;
@@ -74,14 +74,14 @@ void ir_rx_handle()
 
     // Sample every ~100us
     ir_buffer = 0;
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < IR_PACKET_SIZE; i++) {
         ir_buffer = ir_buffer << 1;
         ir_buffer += ((IR_RX_REG_PIN & (1 << IR_RX_PIN_PIN)) >> IR_RX_PIN_PIN) ^ 1;
         _delay_us(97);
     }
 
     // Copy ir_data into an array
-    for (int i = 0; i < 7; i++) {
+    for (int i = 0; i < IR_PACKET_SIZE; i++) {
         ir_data[i] = (ir_buffer & (1 << i)) ? 1 : 0;
     }
 
