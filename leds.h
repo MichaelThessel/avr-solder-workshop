@@ -24,9 +24,13 @@ void leds_run(int brightness, int delay);
 void leds_off();
 
 /**
+ * Blink all leds white
+ */
+void leds_on();
+
+/**
  * Blink all leds
  */
-void leds_blink();
-
+void leds_blink(struct cRGB color);
 
 #endif
