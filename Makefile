@@ -1,6 +1,6 @@
 BIN=main
 OBJS=main.o
-SRCS=main.c leds.c ir.c hamming74.c Light_WS2812/light_ws2812.c game.c
+SRCS=main.c leds.c hamming74.c Light_WS2812/light_ws2812.c game.c
 
 MCU=atmega328p
 SPEED=8000000UL
